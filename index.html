@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Echoes Of 1899 – RedM roleplay server sat i 1899. Slut dig til vores venlige western-community.">
+    <title>Echoes Of 1899 • RedM RP</title>
+
+    <!-- Google Fonts: Western-esque headline + readable body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto+Slab:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --beige: #e9dcc7;
+            --tan: #d7c4a1;
+            --brown-700: #5a3f2e;
+            --brown-800: #4a3325;
+            --brown-900: #2f2117;
+            --black: #0f0d0b;
+            --accent: #c27a3a;
+            --accent-dark: #a8642e;
+            --text: #1f1a17;
+            --muted: #6e5b4d;
+            --link: #b0602b;
+        }
+
+        /* Reset/normalize (minimal) */
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font-family: "Roboto Slab", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: var(--text);
+            background: var(--beige);
+            line-height: 1.6;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: var(--link); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* Subtle parchment-like background texture with CSS only */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background:
+                radial-gradient(1200px 600px at 20% -20%, rgba(0,0,0,0.08), transparent 60%),
+                radial-gradient(1000px 500px at 120% 0%, rgba(0,0,0,0.06), transparent 50%),
+                linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0));
+            pointer-events: none;
+        }
+
+        /* Layout helpers */
+        .container {
+            width: min(1100px, 92%);
+            margin: 0 auto;
+        }
+
+        /* Header / Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: linear-gradient(0deg, rgba(234, 221, 200, 0.75), rgba(234, 221, 200, 0.9)), var(--beige);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid rgba(74, 51, 37, 0.15);
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+        }
+        .brand {
+            font-family: "Cinzel", serif;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--brown-900);
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+        .brand small {
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .nav-links a {
+            color: var(--brown-800);
+            font-weight: 500;
+            padding: 0.4rem 0.6rem;
+            border-radius: 6px;
+        }
+        .nav-links a:hover {
+            background: rgba(90, 63, 46, 0.08);
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid rgba(74, 51, 37, 0.35);
+            color: var(--brown-900);
+            padding: 0.45rem 0.6rem;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            color: #fff;
+            background:
+                radial-gradient(1200px 600px at 80% 0%, rgba(0,0,0,0.35), transparent 60%),
+                linear-gradient(180deg, rgba(47, 33, 23, 0.85), rgba(47, 33, 23, 0.85)),
+                repeating-linear-gradient(135deg, #3c2a1f 0 6px, #37271d 6px 12px);
+        }
+        .hero-inner {
+            padding: 5.5rem 0 4rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: "Cinzel", serif;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            margin: 0 0 0.5rem;
+            letter-spacing: 0.06em;
+            text-shadow: 0 2px 0 rgba(0,0,0,0.25);
+        }
+        .hero p {
+            margin: 0 auto 1.5rem;
+            max-width: 48ch;
+            color: #e9dcc7;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+            color: #fff;
+            padding: 0.75rem 1.1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+        }
+        .cta:hover { filter: brightness(1.03); text-decoration: none; }
+
+        /* Sections */
+        section { padding: 3rem 0; }
+
+        .card {
+            background: #fff8ef;
+            border: 1px solid rgba(74, 51, 37, 0.18);
+            border-radius: 14px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-family: "Cinzel", serif;
+            color: var(--brown-900);
+            letter-spacing: 0.04em;
+            margin: 0 0 1rem;
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Lists styled like a notice board */
+        .rules-list {
+            margin: 0.5rem 0 0;
+            padding-left: 1.1rem;
+        }
+        .rules-list li { margin: 0.35rem 0; }
+
+        /* About layout */
+        .about {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 1rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(90, 63, 46, 0.08);
+            color: var(--brown-800);
+            padding: 0.25rem 0.55rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+        }
+
+        /* Contact */
+        .contact-ways {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .contact-ways a.card { display: block; text-align: center; padding: 1.4rem; }
+        .contact-ways strong { display: block; color: var(--brown-900); margin-bottom: 0.35rem; }
+        .contact-ways span { color: var(--muted); font-size: 0.95rem; }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0 3rem;
+            color: #eee;
+            background: linear-gradient(180deg, var(--brown-800), var(--brown-900));
+            text-align: center;
+        }
+        footer small { color: #d7c4a1; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+            .about { grid-template-columns: 1fr; }
+            .contact-ways { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 720px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: inline-flex; }
+            .nav-open .nav-links {
+                display: grid;
+                position: absolute;
+                top: 100%;
+                right: 0;
+                left: 0;
+                background: rgba(233, 220, 199, 0.98);
+                padding: 0.75rem 4%;
+                border-bottom: 1px solid rgba(74, 51, 37, 0.15);
+                gap: 0.25rem;
+            }
+            .hero-inner { padding: 4.5rem 0 3rem; }
+            .contact-ways { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav" role="navigation" aria-label="Primær">
+            <div class="brand">
+                Echoes Of 1899
+                <small>RedM RP</small>
+            </div>
+            <nav class="nav-links" aria-label="Sektioner">
+                <a href="#home">Forside</a>
+                <a href="#rules">Regler</a>
+                <a href="#about">Om serveren</a>
+                <a href="#contact">Kontakt</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Åbn menu" aria-expanded="false">Menu</button>
+        </div>
+    </header>
+
+    <main id="home" class="hero" role="main">
+        <div class="container hero-inner">
+            <h1>Echoes Of 1899</h1>
+            <p>Velkommen til et stemningsfuldt RedM roleplay-univers sat i året 1899. Træd ind i en verden af historier, fællesskab og karakterdrevet RP med fokus på respekt og fordybelse.</p>
+            <p>
+                <a class="cta" href="https://cfx.re/join/kb9lza" target="_blank" rel="noopener" aria-label="Tilslut dig serveren via cfx.re">
+                    ➜ Join Server
+                </a>
+            </p>
+        </div>
+    </main>
+
+    <section id="rules" aria-labelledby="rules-title">
+        <div class="container">
+            <h2 id="rules-title" class="section-title">Serverregler</h2>
+            <div class="grid">
+                <div class="card">
+                    <strong>Generelle RP-regler</strong>
+                    <ul class="rules-list">
+                        <li>Respektér alle spillere og vær konstruktiv i din RP.</li>
+                        <li>Ingen griefing, trolling, eller bevidst ødelæggelse af andres RP.</li>
+                        <li>Hold dig til karakteren – metagaming og powergaming er ikke tilladt.</li>
+                        <li>RDM/VDM er forbudt – konflikter skal have RP-baggrund og eskalere naturligt.</li>
+                        <li>Følg personalets anvisninger. Afgørelser truffet af staff respekteres.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <strong>Kommunikation & adfærd</strong>
+                    <ul class="rules-list">
+                        <li>Brug passende sprog og undgå toxic adfærd.</li>
+                        <li>Brug VOIP og emotes til at styrke dit rollespil.</li>
+                        <li>Out-of-character (OOC) holdes på et minimum i spil.</li>
+                        <li>Udnyt ikke bugs/fejl – rapportér dem venligst til staff.</li>
+                        <li>Overtrædelser kan medføre advarsler, kick eller ban.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" aria-labelledby="about-title">
+        <div class="container">
+            <h2 id="about-title" class="section-title">Om serveren</h2>
+            <div class="about">
+                <div class="card">
+                    <p><span class="badge">Community-fokus</span></p>
+                    <p>Echoes Of 1899 er et dansk/skattegrænse-venligt RP-community, hvor historier og karakterer er i centrum. Vi ønsker et trygt miljø for både nye og erfarne rollespillere.</p>
+                    <p>Vi opfordrer til samarbejde, kreativitet og tålmodighed – her handler det om at bygge fortællinger sammen, ikke at vinde.</p>
+                    <p><strong>Vil du deltage?</strong> Læs reglerne, hop på vores Discord og tilslut dig serveren. Staff og community hjælper dig godt i gang.</p>
+                </div>
+                <div class="card">
+                    <p><span class="badge">Praktisk info</span></p>
+                    <ul class="rules-list">
+                        <li>Platform: RedM (PC)</li>
+                        <li>Tidsperiode: 1899 – western-inspireret RP</li>
+                        <li>Whitelist: Kan forekomme ved event eller særlige perioder</li>
+                        <li>Events: Planlagte og spontane – følg med på Discord</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" aria-labelledby="contact-title">
+        <div class="container">
+            <h2 id="contact-title" class="section-title">Kontakt</h2>
+            <div class="contact-ways">
+                <a class="card" href="https://discord.gg/" target="_blank" rel="noopener">
+                    <strong>Discord</strong>
+                    <span>Slut dig til fællesskabet (indsæt jeres invite)</span>
+                </a>
+                <a class="card" href="https://cfx.re/join/kb9lza" target="_blank" rel="noopener">
+                    <strong>Join server</strong>
+                    <span>Direkte via cfx.re</span>
+                </a>
+                <a class="card" href="#rules">
+                    <strong>Regler</strong>
+                    <span>Læs reglerne før du spiller</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <small>© <span id="year"></span> Echoes Of 1899 • RedM Roleplay</small>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        (function () {
+            const header = document.querySelector('header');
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-links');
+            if (!toggle || !nav) return;
+            toggle.addEventListener('click', function () {
+                const open = header.classList.toggle('nav-open');
+                toggle.setAttribute('aria-expanded', String(open));
+            });
+        })();
+
+        // Current year in footer
+        (function () {
+            const el = document.getElementById('year');
+            if (el) el.textContent = String(new Date().getFullYear());
+        })();
+
+        // Smooth scroll for same-page anchors (basic)
+        (function () {
+            const internalLinks = document.querySelectorAll('a[href^="#"]');
+            internalLinks.forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    const id = a.getAttribute('href').slice(1);
+                    const target = document.getElementById(id);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
+
+
